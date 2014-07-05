@@ -11,33 +11,14 @@ import me.bdubz4552.horsestats.HorseStatsCommand;
 import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 
-public class Delname extends HorseStatsCommand implements CommandExecutor {
+public class Delname extends HorseStatsCommand {
 
-	public Delname(HorseStatsMain horseStatsMain) {
-		this.main = horseStatsMain;
+	public Delname(HorseStatsMain hsm) {
+		super(hsm, "delname");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-			Horse h = null;
-			if (p.isInsideVehicle()) {
-				if (p.getVehicle() instanceof Horse) {
-					h = (Horse) p.getVehicle();
-				}
-			}
-			if (command.getName().equalsIgnoreCase("delname")) {
-				if (this.permCheck(p, "delname")) {
-					this.run(p, h);
-				}
-			}
-		} else {
-			sender.sendMessage(ChatColor.BLUE + "[HorseStats] " + ChatColor.RED + "Commands cannot be used in console!");
-		}
-		return true;
-	}
-
-	public void run(Player p, Horse h) {
+	@Override
+	public boolean run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
 				h.setCustomName(null);
@@ -45,8 +26,10 @@ public class Delname extends HorseStatsCommand implements CommandExecutor {
 			} else {
 				Message.OWNER.send(p);
 			}
+			return true;
 		} else {
 			Message.RIDING.send(p);
 		}
+		return false;
 	}
 }

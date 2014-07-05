@@ -14,26 +14,26 @@ import net.gravitydevelopment.updater.*;
 import net.gravitydevelopment.updater.Updater.*;
 
 public class HorseStatsMain extends JavaPlugin {
-	
+
 	protected Logger log;
 	public Translate translate;
-	
+
 	/**
 	 * True if an update is available.
 	 */
 	public boolean updateAvailable = false;
-	public String updateName;	
-	
+	public String updateName;
+
 	/**
 	 * If HorseStats cannot retrieve speed due to mismatched Bukkit versions, this will be true.
 	 */
 	public boolean noSpeedMode = false;
-	
+
 	/**
 	 * Set to true if the config is out of date.
 	 */
 	public boolean outofdateConfig = false;
-	
+
 	/**
 	 * Checks if a player has the global override permission.
 	 * @param p - The player to check permissions for.
@@ -46,7 +46,7 @@ public class HorseStatsMain extends JavaPlugin {
 			return false;
 		}
 	}
-		
+
 	/**
 	 * Called on plugin start.
 	 */
@@ -64,18 +64,18 @@ public class HorseStatsMain extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
-		
+
 		registerCommands();
-		
+
 		getServer().getPluginManager().registerEvents(new AdminNotificationListener(this), this);
-		
+
 		getServer().getPluginManager().registerEvents(new HorseStatsHorseInteractListener(this), this);
-			
+
 		/**
 		 * Check if CraftBukkit matches. Warn if not. Register proper event listener based on outcome.
 		 */
 		if (checkVersion() == false) {
-			noSpeedMode = true;			
+			noSpeedMode = true;
 			log.warning("The version of CraftBukkit on this server does not match that of HorseStats.");
 			log.warning("The HorseStats config file is reporting that this version of HorseStats, " +
 			this.getDescription().getVersion() + " is using " + this.getConfig().getConfigurationSection("information").getString("HorseStats Is Running"));
@@ -85,21 +85,21 @@ public class HorseStatsMain extends JavaPlugin {
 		} else {
 			getServer().getPluginManager().registerEvents(new HorseStatsEventListener(this), this);
 		}
-		
+
 		/**
 		 * Check if config is outdated. Warn if so.
-		 * 
+		 *
 		 * Config version in config.yml and HorseStats version do not need to match exactly;
 		 * if the config is updated, the config version will be updated to match HorseStats version.
-		 * Otherwise it will remain the same. 
+		 * Otherwise it will remain the same.
 		 */
 		if (this.getConfig().getString("information.configVersion") == null || this.getConfig().getDouble("information.configVersion") != 3.03) {
-			outofdateConfig = true;			
+			outofdateConfig = true;
 			log.warning("It appears your HorseStats configuration file is out of date.");
 			log.warning("Please take note of the settings you have in it, and delete it.");
 			log.warning("A new configuration with new settings will generate next time you start or reload your server.");
 		}
-		
+
 		/**
 		 * Update notifier; only notifies, does not download.
 		 */
@@ -111,14 +111,14 @@ public class HorseStatsMain extends JavaPlugin {
 				log.info("A new build of HorseStats is available!");
 				log.info("You can find " + updater.getLatestName() + " at: https://dev.bukkit.org/bukkit-plugins/horsestats");
 			}
-		}		
+		}
 	}
-	
+
 	/**
 	 * Checks if the server version matches the plugin version.
 	 * If classes are found, no problem.
 	 * If not, no speed mode is activated.
-	 * 
+	 *
 	 * When CraftBukkit updates:
 	 * 1) Replace imports in Event Handlers <del>and SetStat command</del>
 	 * 2) Replace class strings below
@@ -134,7 +134,7 @@ public class HorseStatsMain extends JavaPlugin {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Registers all commands.
 	 */
@@ -148,10 +148,10 @@ public class HorseStatsMain extends JavaPlugin {
 		getCommand("slayhorse").setExecutor(new Slayhorse(this));
 		getCommand("hspawn").setExecutor(new Hspawn(this));
 		getCommand("setstyle").setExecutor(new SetStyle(this));
-		getCommand("setstat").setExecutor(new SetStat());
+		getCommand("setstat").setExecutor(new SetStat(this));
 		getCommand("tame").setExecutor(new Tame(this));
 	}
-	
+
 	/**
 	 * Gets a ConfigurationSection object from the given path.
 	 * @param sectionName - The path to get the ConfigurationSection for.
@@ -161,7 +161,7 @@ public class HorseStatsMain extends JavaPlugin {
 		ConfigurationSection section = this.getConfig().getConfigurationSection(sectionName);
 		return section;
 	}
-	
+
 	/**
 	 * Returns the boolean value of the specified option node. This method is <b><i>exclusive</i></b>
 	 * to the "options" section of the configuration.

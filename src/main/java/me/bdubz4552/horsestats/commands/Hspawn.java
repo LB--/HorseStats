@@ -17,33 +17,14 @@ import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 import me.bdubz4552.horsestats.translate.Translate;
 
-public class Hspawn extends HorseStatsCommand implements CommandExecutor {
+public class Hspawn extends HorseStatsCommand {
 
-	public Hspawn(HorseStatsMain horseStatsMain) {
-		this.main = horseStatsMain;
+	public Hspawn(HorseStatsMain hsm) {
+		super(hsm, "hspawn");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-			Horse h = null;
-			if (p.isInsideVehicle()) {
-				if (p.getVehicle() instanceof Horse) {
-					h = (Horse) p.getVehicle();
-				}
-			}
-			if (command.getName().equalsIgnoreCase("hspawn")) {
-				if (this.permCheck(p, "hspawn")) {
-					this.run(p, h, args);
-				}
-			}
-		} else {
-			sender.sendMessage(""+Message.CONSOLE);
-		}
-		return true;
-	}
-
-	public void run(Player p, Horse h, String[] args) {
+	@Override
+	public boolean run(Player p, Horse h, String[] args) {
 		if (h == null) {
 			Variant v = null;
 			if (args.length == 1) {
@@ -72,8 +53,10 @@ public class Hspawn extends HorseStatsCommand implements CommandExecutor {
 				h.setStyle(s[y]);
 				Message.HORSE.send(p);
 			}
+			return true;
 		} else {
 			Message.NOT_RIDING.send(p);
 		}
+		return false;
 	}
 }

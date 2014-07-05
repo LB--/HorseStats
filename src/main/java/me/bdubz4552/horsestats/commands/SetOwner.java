@@ -12,30 +12,10 @@ import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 import me.bdubz4552.horsestats.translate.Translate;
 
-public class SetOwner extends HorseStatsCommand implements CommandExecutor {
+public class SetOwner extends HorseStatsCommand {
 
-	public SetOwner(HorseStatsMain horseStatsMain) {
-		this.main = horseStatsMain;
-	}
-
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-			Horse h = null;
-			if (p.isInsideVehicle()) {
-				if (p.getVehicle() instanceof Horse) {
-					h = (Horse) p.getVehicle();
-				}
-			}
-			if (command.getName().equalsIgnoreCase("setowner")) {
-				if (this.permCheck(p, "setowner")) {
-					this.run(p, h, args);
-				}
-			}
-		} else {
-			sender.sendMessage(""+Message.CONSOLE);
-		}
-		return true;
+	public SetOwner(HorseStatsMain hsm) {
+		super(hsm, "setowner");
 	}
 
 	/**
@@ -43,8 +23,8 @@ public class SetOwner extends HorseStatsCommand implements CommandExecutor {
 	 * getting a Player object from whatever the Player's name happens to be at that moment
 	 * should not be a problem.
 	 */
-	@SuppressWarnings("deprecation")
-	public void run(Player p, Horse h, String[] args) {
+	@Override
+	public boolean run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
 				if (args.length == 1) {
@@ -61,8 +41,10 @@ public class SetOwner extends HorseStatsCommand implements CommandExecutor {
 			} else {
 				Message.OWNER.send(p);
 			}
+			return true;
 		} else {
 			Message.RIDING.send(p);
 		}
+		return false;
 	}
 }

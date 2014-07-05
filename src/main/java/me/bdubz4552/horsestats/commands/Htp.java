@@ -8,28 +8,13 @@ import org.bukkit.entity.Player;
 import me.bdubz4552.horsestats.*;
 import me.bdubz4552.horsestats.event.HorseStatsListenerBase;
 
-public class Htp extends HorseStatsCommand implements CommandExecutor {
+public class Htp extends HorseStatsCommand {
 
 	private HorseStatsListenerBase base;
 
-	public Htp(HorseStatsMain horseStatsMain, HorseStatsListenerBase horseStatsListenerBase) {
-		this.main = horseStatsMain;
-		this.base = horseStatsListenerBase;
-	}
-
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-
-			if (command.getName().equalsIgnoreCase("htp")) {
-				if (this.permCheck(p, "htp")) {
-					this.run(p);
-				}
-			}
-		} else {
-			sender.sendMessage(""+Message.CONSOLE);
-		}
-		return true;
+	public Htp(HorseStatsMain hsm, HorseStatsListenerBase hsl) {
+		super(hsm, "htp");
+		this.base = hsl;
 	}
 
 	/**
@@ -37,7 +22,8 @@ public class Htp extends HorseStatsCommand implements CommandExecutor {
 	 * but no success.
 	 * @param p - The player who initiated the teleport.
 	 */
-	public void run(Player p) {
+	@Override
+	public boolean run(Player p, Horse _, String[] args) {
 		if (base.teleportQueue.get(p.getName()) == null) {
 			Message.NONE_SELECTED.send(p);
 		} else {
@@ -45,7 +31,7 @@ public class Htp extends HorseStatsCommand implements CommandExecutor {
 			if (main.configBoolean("interWorldTeleport") == false) {
 				if (p.getWorld() != h.getWorld()) {
 					Message.INTER_WORLD.send(p);
-					return;
+					return false;
 				}
 			}
 
@@ -56,6 +42,8 @@ public class Htp extends HorseStatsCommand implements CommandExecutor {
 			}
 
 			base.teleportQueue.remove(p.getName());
+			return true;
 		}
+		return false;
 	}
 }

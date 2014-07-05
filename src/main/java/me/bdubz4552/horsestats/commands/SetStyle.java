@@ -14,32 +14,14 @@ import me.bdubz4552.horsestats.HorseStatsCommand;
 import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 
-public class SetStyle extends HorseStatsCommand implements CommandExecutor {
-	public SetStyle(HorseStatsMain horseStatsMain) {
-		this.main = horseStatsMain;
+public class SetStyle extends HorseStatsCommand {
+
+	public SetStyle(HorseStatsMain hsm) {
+		super(hsm, "setstyle");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-			Horse h = null;
-			if (p.isInsideVehicle()) {
-				if (p.getVehicle() instanceof Horse) {
-					h = (Horse) p.getVehicle();
-				}
-			}
-			if (command.getName().equalsIgnoreCase("setstyle")) {
-				if (this.permCheck(p, "setstyle")) {
-					this.run(p, h, args);
-				}
-			}
-		} else {
-			sender.sendMessage(""+Message.CONSOLE);
-		}
-		return true;
-	}
-
-	public void run(Player p, Horse h, String[] args) {
+	@Override
+	public boolean run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
 				if (h.getVariant() == Variant.HORSE) {
@@ -104,9 +86,11 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 			} else {
 				Message.OWNER.send(p);
 			}
+			return true;
 		} else {
 			Message.RIDING.send(p);
 		}
+		return false;
 	}
 	public void setstatHelp(Player p) {
 		String[] styleHelp =

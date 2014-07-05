@@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
 import me.bdubz4552.horsestats.HorseStatsCommand;
 import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
+import org.bukkit.entity.Horse;
 
-public class Horsestats extends HorseStatsCommand implements CommandExecutor {
+public class Horsestats extends HorseStatsCommand {
 	static String[] help =
 	{ GREEN  + "========================"
 	, YELLOW + "HorseStats by 'bdubz4552'"
@@ -27,19 +28,13 @@ public class Horsestats extends HorseStatsCommand implements CommandExecutor {
 	, YELLOW + "To see HorseStats commands, use '/help horsestats'. If this does not work, contact an administrator."
 	};
 
-	public Horsestats(HorseStatsMain horseStatsMain) {
-		this.main = horseStatsMain;
+	public Horsestats(HorseStatsMain hsm) {
+		super(hsm, "horsestats");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (sender instanceof Player) {
-			Player p = (Player) sender;
-			if (command.getName().equalsIgnoreCase("horsestats")) {
-				p.sendMessage(help);
-			}
-		} else {
-			sender.sendMessage(""+Message.CONSOLE);
-		}
+	@Override
+	public boolean run(Player p, Horse h, String[] args) {
+		p.sendMessage(help);
 		return true;
 	}
 }
