@@ -20,7 +20,7 @@ public class SetStat extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("setstat")) {
+			if (command.getName().equalsIgnoreCase("setstat")) {
 				if (this.permCheck(p, "setstat")) {
 					this.run(p, h, args);
 				}
@@ -30,11 +30,11 @@ public class SetStat extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	public void run(Player p, Horse h, String args[]) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
-				if (args.length == 2) {			
+				if (args.length == 2) {
 					if (args[0].equalsIgnoreCase("health")) {
 						double health = Double.parseDouble(args[1]);
 						h.setMaxHealth(2 * health);

@@ -13,11 +13,11 @@ import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 
 public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
-	
+
 	public Slayhorse(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
@@ -27,7 +27,7 @@ public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("slayhorse")) {
+			if (command.getName().equalsIgnoreCase("slayhorse")) {
 				if (this.permCheck(p, "slayhorse")) {
 					this.run(p, h, args);
 				}
@@ -37,7 +37,7 @@ public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	public void run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			h.eject();
@@ -48,7 +48,7 @@ public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
 					p.chat(Message.LAUNCH.getString());
 					Location loc = new Location(h.getWorld(), h.getLocation().getX(), 256, h.getLocation().getZ());
 					h.getWorld().strikeLightning(loc);
-				}		
+				}
 			}
 			h.setHealth(0);
 			Message.SLAIN.send(p);

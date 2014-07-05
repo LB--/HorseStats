@@ -13,7 +13,7 @@ import me.bdubz4552.horsestats.Message;
 import me.bdubz4552.horsestats.translate.Translate;
 
 public class SetOwner extends HorseStatsCommand implements CommandExecutor {
-	
+
 	public SetOwner(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
 	}
@@ -27,7 +27,7 @@ public class SetOwner extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("setowner")) {
+			if (command.getName().equalsIgnoreCase("setowner")) {
 				if (this.permCheck(p, "setowner")) {
 					this.run(p, h, args);
 				}
@@ -37,7 +37,7 @@ public class SetOwner extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Because setOwner() uses Player objects and not Strings representing player names,
 	 * getting a Player object from whatever the Player's name happens to be at that moment
@@ -47,7 +47,7 @@ public class SetOwner extends HorseStatsCommand implements CommandExecutor {
 	public void run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
-				if (args.length == 1) {					
+				if (args.length == 1) {
 					if (Bukkit.getServer().getPlayerExact(args[0]) != null) {
 						h.eject();
 						Message.OWNER_CHANGED.send(p);

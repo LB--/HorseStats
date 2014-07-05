@@ -17,11 +17,11 @@ import me.bdubz4552.horsestats.Message;
 public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 	static ChatColor ccg = ChatColor.GREEN;
 	static ChatColor ccy = ChatColor.YELLOW;
-	
+
 	public SetStyle(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
@@ -31,7 +31,7 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("setstyle")) {
+			if (command.getName().equalsIgnoreCase("setstyle")) {
 				if (this.permCheck(p, "setstyle")) {
 					this.run(p, h, args);
 				}
@@ -41,7 +41,7 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	public void run(Player p, Horse h, String[] args) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
@@ -60,7 +60,7 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 							else if (args[1].equalsIgnoreCase("creamy")) {
 								h.setColor(Color.CREAMY);
 							}
-							
+
 							else if (args[1].equalsIgnoreCase("darkbrown")) {
 								h.setColor(Color.DARK_BROWN);
 							}
@@ -91,7 +91,7 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 							} else {
 								Message.STYLE_PARAMS.send(p);
 							}
-						}					
+						}
 					} else if (args.length == 1){
 						if (args[0].equals("?")) {
 							setstatHelp(p);

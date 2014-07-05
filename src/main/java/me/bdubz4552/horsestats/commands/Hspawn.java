@@ -18,11 +18,11 @@ import me.bdubz4552.horsestats.Message;
 import me.bdubz4552.horsestats.translate.Translate;
 
 public class Hspawn extends HorseStatsCommand implements CommandExecutor {
-	
+
 	public Hspawn(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
@@ -32,7 +32,7 @@ public class Hspawn extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("hspawn")) {
+			if (command.getName().equalsIgnoreCase("hspawn")) {
 				if (this.permCheck(p, "hspawn")) {
 					this.run(p, h, args);
 				}
@@ -42,9 +42,9 @@ public class Hspawn extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	public void run(Player p, Horse h, String[] args) {
-		if (h == null) {						
+		if (h == null) {
 			Variant v = null;
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("donkey")) {

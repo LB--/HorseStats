@@ -12,11 +12,11 @@ import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 
 public class Delname extends HorseStatsCommand implements CommandExecutor {
-	
+
 	public Delname(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
@@ -26,7 +26,7 @@ public class Delname extends HorseStatsCommand implements CommandExecutor {
 					h = (Horse) p.getVehicle();
 				}
 			}
-			if (label.equalsIgnoreCase("delname")) {
+			if (command.getName().equalsIgnoreCase("delname")) {
 				if (this.permCheck(p, "delname")) {
 					this.run(p, h);
 				}
@@ -36,7 +36,7 @@ public class Delname extends HorseStatsCommand implements CommandExecutor {
 		}
 		return true;
 	}
-	
+
 	public void run(Player p, Horse h) {
 		if (h != null) {
 			if (h.getOwner() == p || main.hasGlobalOverride(p)) {
