@@ -26,7 +26,7 @@ public class SetStat extends HorseStatsCommand implements CommandExecutor {
 				}
 			}
 		} else {
-			sender.sendMessage(Message.CONSOLE.getString());
+			sender.sendMessage(""+Message.CONSOLE);
 		}
 		return true;
 	}

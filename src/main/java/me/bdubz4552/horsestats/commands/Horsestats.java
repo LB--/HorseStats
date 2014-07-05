@@ -38,7 +38,7 @@ public class Horsestats extends HorseStatsCommand implements CommandExecutor {
 				p.sendMessage(help);
 			}
 		} else {
-			sender.sendMessage(Message.CONSOLE.getString());
+			sender.sendMessage(""+Message.CONSOLE);
 		}
 		return true;
 	}

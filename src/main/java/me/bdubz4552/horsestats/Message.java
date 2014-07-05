@@ -16,105 +16,106 @@ public enum Message {
 	ERROR(ChatColor.YELLOW + "[HorseStats] " + ChatColor.RED),
 	/** Green Text */
 	STAT(ChatColor.GREEN + ""),
-	
+
 	//Delchest
 	/** Chest Deleted. */
-	CHEST_DELETED(NORMAL.getString() + Translate.message("chestDelete")),
-	
+	CHEST_DELETED(NORMAL.toString() + Translate.message("chestDelete")),
+
 	//Delname
 	/** Custom name erased. */
-	NAME_ERASED(NORMAL.getString() + Translate.message("nameErase")),
-	
+	NAME_ERASED(NORMAL.toString() + Translate.message("nameErase")),
+
 	//Hspawn
 	/** Horse Spawned */
-	HORSE(NORMAL.getString() + Translate.message("horseSpawn")),
+	HORSE(NORMAL.toString() + Translate.message("horseSpawn")),
 	/** Donkey Spawned */
-	DONKEY(NORMAL.getString() + Translate.message("donkeySpawn")),
+	DONKEY(NORMAL.toString() + Translate.message("donkeySpawn")),
 	/** Mule Spawned */
-	MULE(NORMAL.getString() + Translate.message("muleSpawn")),
+	MULE(NORMAL.toString() + Translate.message("muleSpawn")),
 	/** Cannot be riding a horse */
-	NOT_RIDING(ERROR.getString() + Translate.message("cannotRide")),
-	
+	NOT_RIDING(ERROR.toString() + Translate.message("cannotRide")),
+
 	//htp
 	/** No horse selected */
-	NONE_SELECTED(ERROR.getString() + Translate.message("noneSelected")),
+	NONE_SELECTED(ERROR.toString() + Translate.message("noneSelected")),
 	/** Can't tp between worlds */
-	INTER_WORLD(ERROR.getString() + Translate.message("worldTP")),
+	INTER_WORLD(ERROR.toString() + Translate.message("worldTP")),
 	/** Teleporting */
-	TELEPORTING(NORMAL.getString() + Translate.message("teleporting")),
+	TELEPORTING(NORMAL.toString() + Translate.message("teleporting")),
 	/** Teleport failed */
-	TELEPORT_FAIL(ERROR.getString() + Translate.message("teleportFail")),
-	
+	TELEPORT_FAIL(ERROR.toString() + Translate.message("teleportFail")),
+
 	//Setowner
 	/** Changed owner */
-	OWNER_CHANGED(NORMAL.getString() + Translate.message("ownerChange")),
-	
+	OWNER_CHANGED(NORMAL.toString() + Translate.message("ownerChange")),
+
 	//Setstat
 	/** Horses jump no higher than 22 */
-	JUMP_HEIGHT(ERROR.getString() + Translate.message("jumpLimit")),
-	
+	JUMP_HEIGHT(ERROR.toString() + Translate.message("jumpLimit")),
+
 	//Setstyle
 	/** Only horses can be modified */
-	ONLY_MODIFY_HORSE(ERROR.getString() + Translate.message("onlyHorse")),
-	
+	ONLY_MODIFY_HORSE(ERROR.toString() + Translate.message("onlyHorse")),
+
 	//Slayhorse
 	/** He's a magical pony */
 	LAUNCH(Translate.message("launch")),
 	/** Slain */
-	SLAIN(NORMAL.getString() + Translate.message("slain")),
-	
+	SLAIN(NORMAL.toString() + Translate.message("slain")),
+
 	//Tame
 	/** Now own this horse */
-	NOW_OWN(NORMAL.getString() + Translate.message("nowOwn")),
+	NOW_OWN(NORMAL.toString() + Translate.message("nowOwn")),
 	/** Already own this horse */
-	ALREADY_OWN(NORMAL.getString() + Translate.message("alreadyOwn")),
-	
+	ALREADY_OWN(NORMAL.toString() + Translate.message("alreadyOwn")),
+
 	//Untame
 	/** Untamed */
-	UNTAME(NORMAL.getString() + Translate.message("untame")),
-	
+	UNTAME(NORMAL.toString() + Translate.message("untame")),
+
 	//Admin listener
 	/** Config outdated */
-	CONFIG_WARN(NORMAL.getString() + Translate.message("configWarning")),
+	CONFIG_WARN(NORMAL.toString() + Translate.message("configWarning")),
 	/** No speed mode active */
-	NO_SPEED_WARN(NORMAL.getString() + Translate.message("noSpeedWarning")),
-	
+	NO_SPEED_WARN(NORMAL.toString() + Translate.message("noSpeedWarning")),
+
 	//Main listener
 	/** Fixed owner-tamed continuity error */
-	OWNER_FIX(NORMAL.getString() + Translate.message("ownerFix")),
+	OWNER_FIX(NORMAL.toString() + Translate.message("ownerFix")),
 	/** Horse selected for teleport */
-	TELEPORT_SELECTED(NORMAL.getString() + Translate.message("teleportSelected")),
+	TELEPORT_SELECTED(NORMAL.toString() + Translate.message("teleportSelected")),
 	/** Horse deselected for teleport */
-	TELEPORT_DESELECTED(NORMAL.getString() + Translate.message("teleportDeselected")),
+	TELEPORT_DESELECTED(NORMAL.toString() + Translate.message("teleportDeselected")),
 	/** Must be tamed */
-	TELEPORT_TAME(ERROR.getString() + Translate.message("teleportUntame")),
-	
+	TELEPORT_TAME(ERROR.toString() + Translate.message("teleportUntame")),
+
 	//Error Messages
-	RIDING(ERROR.getString() + Translate.message("riding")),
-	PERMS(ERROR.getString() + Translate.message("permissions")),
-	ATTACK(ERROR.getString() + Translate.message("attack")),
-	OWNER(ERROR.getString() + Translate.message("owner")),
-	STYLE_PARAMS(ERROR.getString() + Translate.message("setstyleArgs")),
-	PLAYER(ERROR.getString() + Translate.message("playerNotFound")),
-	CONSOLE(ERROR.getString() + Translate.message("console"));
-	
+	RIDING(ERROR.toString() + Translate.message("riding")),
+	PERMS(ERROR.toString() + Translate.message("permissions")),
+	ATTACK(ERROR.toString() + Translate.message("attack")),
+	OWNER(ERROR.toString() + Translate.message("owner")),
+	STYLE_PARAMS(ERROR.toString() + Translate.message("setstyleArgs")),
+	PLAYER(ERROR.toString() + Translate.message("playerNotFound")),
+	CONSOLE(ERROR.toString() + Translate.message("console"));
+
 	public final String message;
-	
+
 	private Message(String str) {
 		message = str;
 	}
-	
-	public String getString() {
+
+	@Override
+	public String toString() {
 		return message;
 	}
-	
+
 	/**
 	 * Send a message to a player, with a specific string.
 	 * @param p - Player to receive the message.
 	 * @param msg - The message to be received.
 	 */
 	public void send(Player p, String string) {
-		p.sendMessage(this.message + string);
+		p.sendMessage(this + string);
 	}
 
 	/**
@@ -122,6 +123,6 @@ public enum Message {
 	 * @param p - Player to receive the message.
 	 */
 	public void send(Player p) {
-		p.sendMessage(this.message);
+		p.sendMessage(""+this);
 	}
 }

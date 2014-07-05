@@ -33,7 +33,7 @@ public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
 				}
 			}
 		} else {
-			sender.sendMessage(Message.CONSOLE.getString());
+			sender.sendMessage(""+Message.CONSOLE);
 		}
 		return true;
 	}
@@ -45,7 +45,7 @@ public class Slayhorse extends HorseStatsCommand implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("launch") && p.hasPermission("HorseStats.slayhorse.launch")) {
 					Vector vec = new Vector(0, 6, 0);
 					h.setVelocity(vec);
-					p.chat(Message.LAUNCH.getString());
+					p.chat(Message.LAUNCH.toString());
 					Location loc = new Location(h.getWorld(), h.getLocation().getX(), 256, h.getLocation().getZ());
 					h.getWorld().strikeLightning(loc);
 				}
