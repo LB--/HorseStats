@@ -1,6 +1,6 @@
 package me.bdubz4552.horsestats.commands;
 
-import org.bukkit.ChatColor;
+import static org.bukkit.ChatColor.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,8 +15,6 @@ import me.bdubz4552.horsestats.HorseStatsMain;
 import me.bdubz4552.horsestats.Message;
 
 public class SetStyle extends HorseStatsCommand implements CommandExecutor {
-	static ChatColor ccg = ChatColor.GREEN;
-	static ChatColor ccy = ChatColor.YELLOW;
 
 	public SetStyle(HorseStatsMain horseStatsMain) {
 		this.main = horseStatsMain;
@@ -112,7 +110,16 @@ public class SetStyle extends HorseStatsCommand implements CommandExecutor {
 		}
 	}
 	public void setstatHelp(Player p) {
-		String[] styleHelp = {ccg + "========================", ccy + "Help for /setstyle", ccg + "========================", ccy + "Usage: /setstyle <color|style> <value>", ccy + "Values for styles:", ccg + "-none -blackdots -whitedots -white -whitefield", ccy + "Values for color:", ccg + "-black -brown -chestnut -creamy -darkbrown -gray -black"};
+		String[] styleHelp =
+		{ GREEN  + "========================"
+		, YELLOW + "Help for /setstyle"
+		, GREEN  + "========================"
+		, YELLOW + "Usage: /setstyle <color|style> <value>"
+		, YELLOW + "Values for styles:"
+		, GREEN  + "-none -blackdots -whitedots -white -whitefield"
+		, YELLOW + "Values for color:"
+		, GREEN  + "-black -brown -chestnut -creamy -darkbrown -gray -black"
+		};
 		p.sendMessage(styleHelp);
 	}
 }
