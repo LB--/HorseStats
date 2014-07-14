@@ -27,23 +27,21 @@ public class Translate {
 	 * @param main - HorseStatsMain
 	 * @throws IOException - Thrown if translate.yml is not found.
 	 */
-	public Translate(HorseStatsMain main) throws IOException{
+	public Translate(HorseStatsMain main) {
 		this.file = new File("plugins/horsestats/translate.yml");
 
-		if (file.exists()) {
-			YamlConfiguration yc = YamlConfiguration.loadConfiguration(this.file);
-			this.translateFile = yc;
-			adminNotificationListener = translateFile.getConfigurationSection("AdminNotificationListener");
-			horseStatsCommand = translateFile.getConfigurationSection("HorseStatsCommand");
-			horseStatsEventListener = translateFile.getConfigurationSection("HorseStatsEventListener");
-			message = translateFile.getConfigurationSection("Message");
-			setStat = translateFile.getConfigurationSection("SetStat");
-			setOwner = translateFile.getConfigurationSection("SetOwner");
-			hspawn = translateFile.getConfigurationSection("Hspawn");
-		} else {
+		if (!file.exists()) {
 			main.saveResource("translate.yml", false);
-			throw new IOException("translate file not found");
 		}
+		YamlConfiguration yc = YamlConfiguration.loadConfiguration(this.file);
+		this.translateFile = yc;
+		adminNotificationListener = translateFile.getConfigurationSection("AdminNotificationListener");
+		horseStatsCommand = translateFile.getConfigurationSection("HorseStatsCommand");
+		horseStatsEventListener = translateFile.getConfigurationSection("HorseStatsEventListener");
+		message = translateFile.getConfigurationSection("Message");
+		setStat = translateFile.getConfigurationSection("SetStat");
+		setOwner = translateFile.getConfigurationSection("SetOwner");
+		hspawn = translateFile.getConfigurationSection("Hspawn");
 	}
 
 	/**
@@ -79,8 +77,8 @@ public class Translate {
 	 * @return The translated String at the specified YAML header
 	 */
 	public static final String message(String path) {
-		String translation = message.getString(path);
-		return translation != null ? translation : ("Missing translation \""+path+"\"");
+		Object translation = message.get(path);
+		return translation != null ? translation.toString() : ("Missing translation \""+path+"\"");
 	}
 
 	/**

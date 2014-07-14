@@ -53,17 +53,7 @@ public class HorseStatsMain extends JavaPlugin {
 	public void onEnable() {
 		this.log = this.getLogger();
 		this.saveDefaultConfig();
-		try {
-			this.translate = new Translate(this);
-		} catch (IOException e) {
-			//If the IOException is from the missing file
-			if (e.getMessage().equalsIgnoreCase("Translate file not found")) {
-				log.info("Creating new 'translate.yml' in '<server root>/plugins/horsestats'");
-			//Any other IOException
-			} else {
-				e.printStackTrace();
-			}
-		}
+		this.translate = new Translate(this);
 
 		registerCommands();
 

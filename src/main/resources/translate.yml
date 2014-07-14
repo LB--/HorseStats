@@ -18,7 +18,7 @@
 #HorseStats uses the raw "true" and "false" objects returned
 #by horse statistics, and thus these cannot be translated.
 AdminNotificationListener:
-  newBuild: "A new build of HorseStats is available! You can find it at:"
+  newBuild: "A new build of HorseStats is available! You can find"
   at: "at:"
 HorseStatsEventListener:
   stats: "Stats"
